@@ -32,23 +32,20 @@ public class Episodio
     
     private String patronSueno;
     
-    private String alimentos;  
+    private ArrayList <String> alimentos;  
+    
+    private ArrayList <String> medicamentos; 
      
-    private String bebidas;
-
-    //-----------------------------------------------------------
-    // Se deja como arrayList o como String?
-    //-----------------------------------------------------------
-    private String actividadFisica;
-    
-    private String notasVoz;
-    
+    private ArrayList <String> bebidas;
+   
+    private ArrayList <String> actividadFisica;    
+      
     private String notasMedico;
     
     private String posiblesCausas;
     
     
-    public Episodio(Date fechaE,String nivelD,String horaE,Long idN,String patronN,String alimentosN,String bebidasN,String actividadN,String notasV)
+    public Episodio(Date fechaE,String nivelD,String horaE,Long idN,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
     {
         fechaEpisodio=fechaE;
         nivelDolor=nivelD;
@@ -57,7 +54,40 @@ public class Episodio
         patronSueno=patronN;
         alimentos=alimentosN;
         bebidas=bebidasN;
-        notasVoz=notasV; 
+        actividadFisica=actividadN; 
+        medicamentos=medicamentoN;
+    }
+
+    public ArrayList<String> getAlimentos() {
+        return alimentos;
+    }
+
+    public void setAlimentos(ArrayList<String> alimentos) {
+        this.alimentos = alimentos;
+    }
+
+    public ArrayList<String> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(ArrayList<String> medicamentos) {
+        this.medicamentos = medicamentos;
+    }
+
+    public ArrayList<String> getBebidas() {
+        return bebidas;
+    }
+
+    public void setBebidas(ArrayList<String> bebidas) {
+        this.bebidas = bebidas;
+    }
+
+    public ArrayList<String> getActividadFisica() {
+        return actividadFisica;
+    }
+
+    public void setActividadFisica(ArrayList<String> actividadFisica) {
+        this.actividadFisica = actividadFisica;
     }
 
     public Long getId() {
@@ -106,41 +136,10 @@ public class Episodio
 
     public void setPatronSueno(String patronSueno) {
         this.patronSueno = patronSueno;
-    }
-
-    public String getAlimentos() {
-        return alimentos;
-    }
-
-    public void setAlimentos(String alimentos) {
-        this.alimentos = alimentos;
-    }
-
-    public String getBebidas() {
-        return bebidas;
-    }
-
-    public void setBebidas(String bebidas) {
-        this.bebidas = bebidas;
-    }
-
-    public String getActividadFisica() {
-        return actividadFisica;
-    }
-
-    public void setActividadFisica(String actividadFisica) {
-        this.actividadFisica = actividadFisica;
-    }
-
-    public String getNotasVoz() {
-        return notasVoz;
-    }
-
-    public void setNotasVoz(String notasVoz) {
-        this.notasVoz = notasVoz;
-    }
-
-    public String getNotasMedico() {
+    }    
+   
+    public String getNotasMedico() 
+    {
         return notasMedico;
     }
 
