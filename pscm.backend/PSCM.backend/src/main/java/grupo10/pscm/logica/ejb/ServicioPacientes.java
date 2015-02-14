@@ -5,9 +5,11 @@
  */
 package grupo10.pscm.logica.ejb;
 
+import grupo10.pscm.exceptions.OperacionFallidaException;
 import grupo10.pscm.logica.interfaces.IServicioPacientes;
 import grupo10.pscm.models.Paciente;
 import grupo10.pscm.persistencia.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -34,18 +36,58 @@ public class ServicioPacientes implements IServicioPacientes
     //----------------------------
     
     @Override
-    public void agregarPaciente(Paciente paciente) throws Exception {
-        persistencia.create(paciente);
+    public void agregarPaciente(Paciente paciente) throws Exception 
+    {
+        
+        
+        try
+        {
+            if(paciente.getId()>0)
+            {
+
+            persistencia.create(paciente);
+            }
+            else
+            {
+                throw new OperacionFallidaException("El número de documento no es válido");
+            }
+        }
+        catch (OperacionFallidaException ex)
+        {
+            throw new OperacionFallidaException(ex.getMessage());
+        }
+        
     }
 
     @Override
-    public void eliminarPaciente(Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminarPaciente(Long id) throws Exception 
+    {
+        Paciente p=(Paciente) persistencia.findById(Paciente.class, id);
+        try
+        {
+            persistencia.delete(p);
+        } 
+        catch (OperacionFallidaException ex)
+        {
+            throw new OperacionFallidaException("No se pudo eliminar al paciente");
+        }
+         
     }
 
     @Override
-    public List<Paciente> getPacientes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Paciente> getPacientes() 
+    {
+       
+        
+        return (ArrayList<Paciente>) persistencia.findAll(Paciente.class);
+       
+       
+        
+    }
+    
+    public void actualizarPaciente(Paciente paciente)
+    {
+        persistencia.update(this);
     }
     
 }
