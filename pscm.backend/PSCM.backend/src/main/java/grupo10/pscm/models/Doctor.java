@@ -105,4 +105,48 @@ public class Doctor
         this.contrasena = con;
     }
     
+     public ArrayList<Episodio> getEpisodiosById(Long id)
+    {
+        ArrayList<Episodio> resultado = new ArrayList<Episodio>();
+        
+        for (Paciente p : pacientes)
+        {
+            ArrayList<Episodio>episodios = p.getEpisodios();
+            
+            for (Episodio epi : episodios) 
+            {
+                if(epi.getId() == id)
+                {
+                    resultado.add(epi);
+                }
+            }
+        }
+        return resultado;
+    }
+        
+    public ArrayList<String> getCatalizadores(Episodio episodio)
+    {
+        ArrayList<String> catalizadores = new ArrayList<String>();
+        
+        ArrayList<String> meds = episodio.getMedicamentos();
+        ArrayList<String> alimentos = episodio.getAlimentos();
+        ArrayList<String> bebidas = episodio.getBebidas();
+        ArrayList<String> actividades = episodio.getActividadFisica();
+        
+        for (String r : meds) {
+            catalizadores.add(r);
+        }
+        for (String r : alimentos) {
+            catalizadores.add(r);
+        }
+        for (String r : bebidas) {
+            catalizadores.add(r);
+        }
+        for (String r : actividades) {
+            catalizadores.add(r);
+        }
+        
+        
+    return catalizadores;
+    }
 }

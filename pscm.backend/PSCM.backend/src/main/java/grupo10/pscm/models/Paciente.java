@@ -104,4 +104,20 @@ public class Paciente
     public void setTelefonoCelular(String telefonoCelular) {
         this.telefonoCelular = telefonoCelular;
     }
+    
+    public void setEpisodios(ArrayList<Episodio>episodios)
+    {
+        this.episodios=episodios;
+    }
+    public void createEpisodio(Date fecha, String nivel, String hora, Long id, String patron, ArrayList<String> alimentos,ArrayList<String> bebidas, ArrayList<String> actividades, ArrayList<String> medicamentos)
+    {
+        Episodio epi = new Episodio(fecha, nivel, hora, id, patron, alimentos, bebidas, actividades, medicamentos);
+        
+        this.episodios.add(epi);
+    }
+    
+    public ArrayList<Episodio> getEpisodios()
+    {
+        return this.episodios;
+    }
 }
