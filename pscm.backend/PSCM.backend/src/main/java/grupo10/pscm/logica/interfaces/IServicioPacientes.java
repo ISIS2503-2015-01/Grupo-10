@@ -18,6 +18,8 @@ public interface IServicioPacientes {
     
     public void agregarPaciente(Paciente paciente) throws Exception;
     
+    public Paciente getPaciente(String id);
+    
     public void eliminarPaciente(Long id) throws Exception;
     
     public List<Paciente> getPacientes();

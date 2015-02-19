@@ -37,7 +37,7 @@ public class ServicioDoctores implements IServicioDoctores
     {
          try
         {
-            if(doctor.getId()>0 && doctor.getNombre()!=null)
+            if(doctor.getNombre()!=null) //TODO check ID later
             {
 
             persistencia.create(doctor);

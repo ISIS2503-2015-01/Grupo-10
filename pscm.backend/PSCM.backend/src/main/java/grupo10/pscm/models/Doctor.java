@@ -18,7 +18,7 @@ public class Doctor
     
    
     @Id   
-    private Long id;
+    private String id;
     
     private String apellido;  
   
@@ -39,7 +39,7 @@ public class Doctor
      * @param telefonoC Telefono del usuario
      */
     
-    public Doctor(String nombreN,String apellidoN,String contrasenaN,Long identificacionN,String telefonoC)
+    public Doctor(String nombreN,String apellidoN,String contrasenaN,String identificacionN,String telefonoC)
     {
         nombre=nombreN;
         apellido=apellidoN;
@@ -83,12 +83,12 @@ public class Doctor
         this.telefonoContacto = tel;
     }
 
-    public Long getId() 
+    public String getId() 
     {
         return id;
     }
 
-    public void setIdentificacion(Long ide) {
+    public void setIdentificacion(String ide) {
         this.id = ide;
     }
     
@@ -106,7 +106,7 @@ public class Doctor
         this.contrasena = con;
     }
     
-     public ArrayList<Episodio> getEpisodiosById(Long id)
+     public ArrayList<Episodio> getEpisodiosById(String id)
     {
         ArrayList<Episodio> resultado = new ArrayList<Episodio>();
         

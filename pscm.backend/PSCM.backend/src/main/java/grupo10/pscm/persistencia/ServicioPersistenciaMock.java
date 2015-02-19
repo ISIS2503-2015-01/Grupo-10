@@ -51,13 +51,15 @@ public class ServicioPersistenciaMock {
         if (pacientes == null)
         {
             pacientes = new ArrayList();
-
-            
-            //TODO Agregar pacientes con episodios
-
             episodios = new ArrayList<Episodio>();
-
-            //TODO Agregar episodios
+            //TODO Agregar pacientes con episodios
+    //TODO Agregar episodios
+            Paciente p1 = new Paciente("Pedro", "Perez", "3105559662", "1", "5559356", "M", "Calle Falsa 123");
+            pacientes.add(p1);
+            Paciente p2 = new Paciente("Ana", "Rodrigeuz", "3125467895", "2", "5551234", "F", "Calle Falsa 243");
+            pacientes.add(p2);
+            Paciente p3 = new Paciente("Wilder", "Cárdenas", "3105585462", "3", "55574856", "M", "Calle Falsa hue");
+            pacientes.add(p3);
             
 
             //Inicializa el arreglo que contiene los doctores
@@ -81,29 +83,19 @@ public class ServicioPersistenciaMock {
         if (obj instanceof Paciente)
         {
             Paciente v = (Paciente) obj;
-            //v.setIdentificacion(pacientes.size() + 1); //TODO fix with actual attribute
+            v.setId(""+pacientes.size() + 1); 
             pacientes.add(v);
         }
         else if (obj instanceof Episodio)
         {
             Episodio m = (Episodio) obj;
-            //m.setReferencia(episodios.size() + 1); //TODO fix with actual attribute
+            m.setId(""+episodios.size() + 1); 
             episodios.add(m);
         } 
         else if (obj instanceof Doctor)
         {
             Doctor m = (Doctor) obj;
-//            for (Doctor us : doctores)
-//            {
-//                if (us.getLogin().equals(m.getLogin()))
-//                {
-//                    throw new OperacionInvalidaException("El doctor '" + m.getLogin() + "' ya ha sido registrado en el sistema");
-//                }
-//                if (us.getDocumento() == m.getDocumento() && us.getTipoDocumento().equals(m.getTipoDocumento()))
-//                {
-//                    throw new OperacionInvalidaException("El doctor con documento '" + m.getDocumento() + "' ya ha sido registrado en el sistema");
-//                }
-//            }
+            m.setIdentificacion(""+doctores.size() + 1); 
             doctores.add(m);
         } 
     }
@@ -121,12 +113,11 @@ public class ServicioPersistenciaMock {
             for (int i = 0; i < pacientes.size(); i++)
             {
                 paciente = pacientes.get(i);
-//                if (paciente.getIdentificacion() == editar.getIdentificacion())
-//                {
-//                    pacientes.set(i, editar);
-//                    break;
-//                }
-                //TODO fix with actual attribute
+                if (paciente.getId().equals(editar.getId()))
+                {
+                    pacientes.set(i, editar);
+                    break;
+                }
             }
 
         }
@@ -137,12 +128,11 @@ public class ServicioPersistenciaMock {
             for (int i = 0; i < episodios.size(); i++)
             {
                 episodio = episodios.get(i);
-//                if (episodio.getReferencia() == editar.getReferencia())
-//                {
-//                    episodios.set(i, editar);
-//                    break;
-//                }
-                //TODO fix with actual attribute
+                if (episodio.getId().equals(editar.getId()))
+                {
+                    episodios.set(i, editar);
+                    break;
+                }
             }
         } 
         else if (obj instanceof Doctor)
@@ -153,12 +143,11 @@ public class ServicioPersistenciaMock {
             for (int i = 0; i < doctores.size(); i++)
             {
                 doctor = doctores.get(i);
-//                if (doctor.getLogin().equals(editar.getLogin()))
-//                {
-//                    doctores.set(i, editar);
-//                    break;
-//                }
-                //TODO fix with actual attribute
+                if (doctor.getId().equals(editar.getId()))
+                {
+                    doctores.set(i, editar);
+                    break;
+                }
             }
         }
     }
@@ -176,12 +165,11 @@ public class ServicioPersistenciaMock {
             for (int e = 0; e < pacientes.size(); e++)
             {
                 Paciente ven = (Paciente) pacientes.get(e);
-//                if (ven.getIdentificacion() == pacienteABorrar.getIdentificacion())
-//                {
-//                    pacientes.remove(e);
-//                    break;
-//                }
-                //TODO fix with actual attribute
+                if (ven.getId().equals(pacienteABorrar.getId()))
+                {
+                    pacientes.remove(e);
+                    break;
+                }
             }
 
         } 
@@ -192,33 +180,27 @@ public class ServicioPersistenciaMock {
             for (int i = 0; i < episodios.size(); i++)
             {
                 episodio = episodios.get(i);
-//                if (eliminar.getReferencia() == episodio.getReferencia())
-//                {
-//                    episodios.remove(i);
-//                    break;
-//                }
-                //TODO fix with actual attribute
+                if (eliminar.getId() == episodio.getId())
+                {
+                    episodios.remove(i);
+                    break;
+                }
             }
 
         } 
         else if (obj instanceof Doctor)
         {
-            Doctor doctorABorrar = (Doctor) obj;
-            
-//            if (doctorABorrar != null && doctorABorrar.getLogin() != null)
-//            {
-//                for (int e = 0; e < doctores.size(); e++)
-//                {
-//                    Doctor ven = (Doctor) doctores.get(e);
-//                    if (ven.getLogin().equals(doctorABorrar.getLogin()))
-//                    {
-//                        doctores.remove(e);
-//                        System.out.print("borrado");
-//                        break;
-//                    }
-//                }
-//            }
-            //TODO fix with actual attribute
+            Doctor doctor;
+            Doctor eliminar = (Doctor) obj;
+            for (int i = 0; i < doctores.size(); i++)
+            {
+                doctor = doctores.get(i);
+                if (eliminar.getId() == doctor.getId())
+                {
+                    episodios.remove(i);
+                    break;
+                }
+            }
         }
     }
 
@@ -260,11 +242,10 @@ public class ServicioPersistenciaMock {
             for (Object v : findAll(c))
             {
                 Paciente ven = (Paciente) v;
-//                if (ven.getIdentificacion() == Long.parseLong(id.toString()))
-//                {
-//                    return ven;
-//                }
-                //TODO fix with actual attribute
+                if (ven.getId().equals((id.toString())))
+                {
+                    return ven;
+                }
             }
         } 
         else if (c.equals(Episodio.class))
@@ -272,12 +253,10 @@ public class ServicioPersistenciaMock {
             for (Object v : findAll(c))
             {
                 Episodio mue = (Episodio) v;
-//                if (Long.parseLong(id.toString())== mue.getReferencia())
-//                {
-//                    return mue;
-//                }
-                
-                //TODO fix with actual attribute
+                if (mue.getId().equals(id))
+                {
+                    return mue;
+                }
             }
         } 
         else if (c.equals(Doctor.class))
@@ -285,11 +264,10 @@ public class ServicioPersistenciaMock {
             for (Object v : findAll(c))
             {
                 Doctor mue = (Doctor) v;
-//                if (mue.getLogin().equals(id))
-//                {
-//                    return mue;
-//                }
-                //TODO fix with actual attribute
+                if (mue.getId().equals(id))
+                {
+                    return mue;
+                }
             }
         }
         return null;

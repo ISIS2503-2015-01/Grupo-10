@@ -29,6 +29,7 @@ public class ServicioPacientes implements IServicioPacientes
     
     public ServicioPacientes()
     {
+        persistencia = new ServicioPersistenciaMock();
     }
     
     //----------------------------
@@ -42,15 +43,14 @@ public class ServicioPacientes implements IServicioPacientes
         
         try
         {
-            if(paciente.getId()>0)
-            {
-
-            persistencia.create(paciente);
-            }
-            else
-            {
-                throw new OperacionFallidaException("El número de documento no es válido");
-            }
+            //if(paciente.getId()>0)
+            //{
+                persistencia.create(paciente);
+            //}
+           // else
+            //{
+               // throw new OperacionFallidaException("El número de documento no es válido");
+            //}
         }
         catch (OperacionFallidaException ex)
         {
@@ -79,15 +79,23 @@ public class ServicioPacientes implements IServicioPacientes
     {
        
         
-        return (ArrayList<Paciente>) persistencia.findAll(Paciente.class);
+        return persistencia.findAll(Paciente.class);
        
        
         
     }
     
+    
+    
     public void actualizarPaciente(Paciente paciente)
     {
-        persistencia.update(this);
+        persistencia.update(paciente);
+    }
+
+    @Override
+    public Paciente getPaciente(String id)
+    {
+        return (Paciente) persistencia.findById(Paciente.class, id);
     }
     
 }

@@ -37,15 +37,14 @@ public class ServicioEpisodios implements IServicioEpisodios
     {
          try
         {
-            if(episodio.getId()>0)
-            {
-
-            persistencia.create(episodio);
-            }
-            else
-            {
-                throw new OperacionFallidaException("El número de documento no es válido ó debe regitrar un nombre valido");
-            }
+            //if(episodio.getId()>0)
+            //{
+                persistencia.create(episodio);
+            //}
+            //else
+            //{
+            //    throw new OperacionFallidaException("El número de documento no es válido ó debe regitrar un nombre valido");
+            //}
         }
         catch (OperacionFallidaException ex)
         {

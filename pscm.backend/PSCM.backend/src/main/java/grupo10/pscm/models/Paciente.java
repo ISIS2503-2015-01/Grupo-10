@@ -19,7 +19,7 @@ public class Paciente
     
    
     @Id   
-    private Long id;
+    private String id;
     
     private String apellido;
     
@@ -37,7 +37,7 @@ public class Paciente
 
     
     
-    public Paciente(String nombreN,String apellidoN,String telefonoC,Long identificacionN,String telefonoF,String generoN,String direccionN)
+    public Paciente(String nombreN,String apellidoN,String telefonoC,String identificacionN,String telefonoF,String generoN,String direccionN)
     {
         nombre=nombreN;
         apellido=apellidoN;
@@ -49,7 +49,7 @@ public class Paciente
         episodios =new ArrayList<Episodio>();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -77,7 +77,7 @@ public class Paciente
         return telefonoCelular;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -109,7 +109,7 @@ public class Paciente
     {
         this.episodios=episodios;
     }
-    public void createEpisodio(Date fecha, String nivel, String hora, Long id, String patron, ArrayList<String> alimentos,ArrayList<String> bebidas, ArrayList<String> actividades, ArrayList<String> medicamentos)
+    public void createEpisodio(Date fecha, String nivel, String hora, String id, String patron, ArrayList<String> alimentos,ArrayList<String> bebidas, ArrayList<String> actividades, ArrayList<String> medicamentos)
     {
         Episodio epi = new Episodio(fecha, nivel, hora, id, patron, alimentos, bebidas, actividades, medicamentos);
         

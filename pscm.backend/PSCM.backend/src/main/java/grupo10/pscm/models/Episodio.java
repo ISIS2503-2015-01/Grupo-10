@@ -20,7 +20,7 @@ public class Episodio
     
    
     @Id   
-    private Long id;
+    private String id;
     
     private Date fechaEpisodio;
     
@@ -45,7 +45,7 @@ public class Episodio
     private String posiblesCausas;
     
     
-    public Episodio(Date fechaE,String nivelD,String horaE,Long idN,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
+    public Episodio(Date fechaE,String nivelD,String horaE,String idN,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
     {
         fechaEpisodio=fechaE;
         nivelDolor=nivelD;
@@ -90,11 +90,11 @@ public class Episodio
         this.actividadFisica = actividadFisica;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
