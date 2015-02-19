@@ -15,11 +15,13 @@ import java.util.List;
  */
 public interface IServicioEpisodios
 {
- public void agregarEpisodio(Episodio episodio) throws Exception;
+    public void agregarEpisodio(Episodio episodio) throws Exception;
  
- public Episodio getEpisodio(String id);
+    public Episodio getEpisodio(String id);
     
     public void eliminarEpisodio(String id) throws Exception;
     
     public List<Episodio> getEpisodios();   
+    
+    public List<Episodio> getEpisodiosPaciente(String id);
 }

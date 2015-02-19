@@ -5,12 +5,9 @@
  */
 package grupo10.pscm.servicios;
 
-import grupo10.pscm.exceptions.OperacionFallidaException;
-import grupo10.pscm.logica.ejb.ServicioPacientes;
-import grupo10.pscm.models.Paciente;
+import grupo10.pscm.logica.ejb.ServicioDoctores;
+import grupo10.pscm.models.Doctor;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -30,51 +27,51 @@ import javax.ws.rs.core.Response;
  *
  * @author estudiante
  */
-@Path("Pacientes")
+@Path("Doctores")
 @Produces(MediaType.APPLICATION_JSON)
-public class PacientesResource {
+public class DoctoresResource {
 
     @Context
     private UriInfo context;
-    private ServicioPacientes servPacientes;
-
+    private ServicioDoctores servDoctores;
+    
     /**
-     * Creates a new instance of GetPacientesResource
+     * Creates a new instance of DoctoresResource
      */
-    public PacientesResource() {
-        servPacientes = new ServicioPacientes();
+    public DoctoresResource() {
+        servDoctores = new ServicioDoctores();
     }
 
     /**
-     * Retrieves representation of an instance of grupo10.pscm.servicios.GetPacientesResource
+     * Retrieves representation of an instance of grupo10.pscm.servicios.DoctoresResource
      * @return an instance of java.lang.String
      */
     @GET
     @Path("/getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
-        List<Paciente> pacientes = servPacientes.getPacientes();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacientes).build();
+        List<Doctor> doctores = servDoctores.getDoctores();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctores).build();
     }
     
     @GET
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPaciente(@QueryParam("id") String code )
+    public Response getDoctor(@QueryParam("id") String code )
     {
-        Paciente p = servPacientes.getPaciente(code);
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(p).build();
+        Doctor d = servDoctores.getDoctor(code);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(d).build();
     }
     
     @POST
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addPaciente(Paciente paciente)
+    public Response addDoctor(Doctor doctor)
     {
         try
         {
-            servPacientes.agregarPaciente(paciente);
-            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(paciente).build();
+            servDoctores.agregarDoctor(doctor);
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctor).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -85,12 +82,12 @@ public class PacientesResource {
     @PUT
     @Path("/edit")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editPaciente(Paciente paciente)
+    public Response editDoctor(Doctor doctor)
     {
         try
         {
-            servPacientes.actualizarPaciente(paciente);
-            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(paciente).build();
+            servDoctores.actualizarDoctor(doctor);
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctor).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -100,22 +97,22 @@ public class PacientesResource {
     @DELETE
     @Path("/delete")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deletePaciente(@QueryParam("id") String code )
+    public Response deleteDoctor(@QueryParam("id") String code )
     {
         //TODO not working, check why
         try
         {
-            servPacientes.eliminarPaciente(code);
-            List<Paciente> pacientes = servPacientes.getPacientes();
-            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacientes).build();
+            servDoctores.eliminarDoctor(code);
+            List<Doctor> doctores = servDoctores.getDoctores();
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctores).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
-    
+
     /**
-     * PUT method for updating or creating an instance of GetPacientesResource
+     * PUT method for updating or creating an instance of DoctoresResource
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */

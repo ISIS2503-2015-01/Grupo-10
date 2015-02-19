@@ -8,6 +8,7 @@ package grupo10.pscm.logica.ejb;
 import grupo10.pscm.exceptions.OperacionFallidaException;
 import grupo10.pscm.logica.interfaces.IServicioEpisodios;
 import grupo10.pscm.models.Episodio;
+import grupo10.pscm.models.Paciente;
 import grupo10.pscm.persistencia.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,10 @@ public class ServicioEpisodios implements IServicioEpisodios
     //Metodos
     //----------------------------
     
+    public ServicioEpisodios()
+    {
+        persistencia = new ServicioPersistenciaMock();
+    }
 
     @Override
     public void agregarEpisodio(Episodio episodio) throws Exception 
@@ -76,6 +81,12 @@ public class ServicioEpisodios implements IServicioEpisodios
     @Override
     public Episodio getEpisodio(String id) {
         return (Episodio) persistencia.findById(Episodio.class, id);
+    }
+
+    @Override
+    public List<Episodio> getEpisodiosPaciente(String id) {
+        Paciente p = (Paciente) persistencia.findById(Paciente.class, id);
+        return p.getEpisodios();
     }
     
     

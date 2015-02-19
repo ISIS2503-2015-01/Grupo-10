@@ -26,6 +26,9 @@ public class ServicioDoctores implements IServicioDoctores
     @EJB
     private ServicioPersistenciaMock persistencia;
     
+    public ServicioDoctores() {
+        persistencia = new ServicioPersistenciaMock();
+    }
     
     //----------------------------
     //Metodos
@@ -77,5 +80,10 @@ public class ServicioDoctores implements IServicioDoctores
      public void actualizarDoctor(Doctor doctor)
     {
         persistencia.update(this);
+    }
+
+    @Override
+    public Doctor getDoctor(String id) {
+        return (Doctor) persistencia.findById(Doctor.class,id);
     }
 }

@@ -40,7 +40,6 @@ public class ServicioPacientes implements IServicioPacientes
     public void agregarPaciente(Paciente paciente) throws Exception 
     {
         
-        
         try
         {
             //if(paciente.getId()>0)
