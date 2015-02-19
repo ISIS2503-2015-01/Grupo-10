@@ -40,10 +40,11 @@ public class EpisodiosResource {
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("/getAll")
     @Produces("application/json")
     public String getJson() {
         //TODO return proper representation object
-        throw new UnsupportedOperationException();
+        return servEpisodios.getEpisodios().toString();
     }
 
     @GET

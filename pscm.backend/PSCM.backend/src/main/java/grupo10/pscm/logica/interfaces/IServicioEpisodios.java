@@ -19,7 +19,7 @@ public interface IServicioEpisodios
  
  public Episodio getEpisodio(String id);
     
-    public void eliminarEpisodio(Long id) throws Exception;
+    public void eliminarEpisodio(String id) throws Exception;
     
     public List<Episodio> getEpisodios();   
 }

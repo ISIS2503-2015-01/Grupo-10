@@ -54,8 +54,8 @@ public class ServicioDoctores implements IServicioDoctores
         
     }
 
-    @Override
-    public void eliminarDoctor(Long id) throws Exception 
+    
+    public void eliminarDoctor(String id) throws Exception 
     {
         Doctor doctor=(Doctor) persistencia.findById(Doctor.class, id);
         try

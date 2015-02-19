@@ -109,11 +109,11 @@ public class Paciente
     {
         this.episodios=episodios;
     }
-    public void createEpisodio(Date fecha, String nivel, String hora, String id, String patron, ArrayList<String> alimentos,ArrayList<String> bebidas, ArrayList<String> actividades, ArrayList<String> medicamentos)
+    public void createEpisodio(Episodio episodio)
     {
-        Episodio epi = new Episodio(fecha, nivel, hora, id, patron, alimentos, bebidas, actividades, medicamentos);
         
-        this.episodios.add(epi);
+        
+        this.episodios.add(episodio);
     }
     
     public ArrayList<Episodio> getEpisodios()

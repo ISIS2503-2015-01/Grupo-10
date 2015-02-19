@@ -52,21 +52,55 @@ public class ServicioPersistenciaMock {
         {
             pacientes = new ArrayList();
             episodios = new ArrayList<Episodio>();
-            //TODO Agregar pacientes con episodios
-    //TODO Agregar episodios
+            ArrayList<String> alimentos = new ArrayList<String>();
+            alimentos.add("papa");
+            alimentos.add("Pollo");
+            alimentos.add("Aguacate");
+            ArrayList<String> bebidas = new ArrayList<String>();
+            bebidas.add("Guaro");
+            bebidas.add("Pola");
+            bebidas.add("Pepsi");
+            ArrayList<String> actividades = new ArrayList<String>();
+            actividades.add("futbol");
+            actividades.add("billar");
+            actividades.add("ping pong");
+            ArrayList<String> medicamentos = new ArrayList<String>();
+            medicamentos.add("algo1");
+            medicamentos.add("algo2");
+            medicamentos.add("algo3");
+            Date fecha = new Date(115, 2, 25);
             Paciente p1 = new Paciente("Pedro", "Perez", "3105559662", "1", "5559356", "M", "Calle Falsa 123");
-            //TODO agregar ep
+            Episodio epi1= new Episodio(fecha, "alto" ,"15:00", "1", "Pesado", alimentos, bebidas, actividades, medicamentos);
+            p1.createEpisodio(epi1);
             pacientes.add(p1);
+            episodios.add(epi1);
+            
             Paciente p2 = new Paciente("Ana", "Rodrigeuz", "3125467895", "2", "5551234", "F", "Calle Falsa 243");
+            Episodio epi2= new Episodio(fecha, "bajo" ,"08:00", "2", "liviano", alimentos, bebidas, actividades, medicamentos);
+            p2.createEpisodio(epi2);
             pacientes.add(p2);
+            episodios.add(epi2);
+            
             Paciente p3 = new Paciente("Wilder", "Cárdenas", "3105585462", "3", "55574856", "M", "Calle Falsa hue");
+            Episodio epi3= new Episodio(fecha, "Medio" ,"18:00", "3", "liviano", alimentos, bebidas, actividades, medicamentos);
+            p3.createEpisodio(epi3);
             pacientes.add(p3);
+            episodios.add(epi3);
+            
             
 
             //Inicializa el arreglo que contiene los doctores
             doctores = new ArrayList<Doctor>();
 
-            //TODO Agregar doctores
+            Doctor d1= new Doctor("Doctor", "Pepper", "melochupa", "1", "Calle Falsa 231");
+            Doctor d2= new Doctor("Doctor", "Azo", "melomama", "2", "Calle Real 231");
+             Doctor d3= new Doctor("Doctor", "Sote", "melopalmetea", "3", "Calle Imaginaria 231");
+              
+             doctores.add(d1);
+             doctores.add(d2);
+             doctores.add(d3);
+            
+    
             
         }
     }
@@ -236,14 +270,14 @@ public class ServicioPersistenciaMock {
      * @param id Identificador unico del objeto.
      * @return obj Resultado de la consulta.
      */
-    public Object findById(Class c, Object id)
+    public Object findById(Class c,String id)
     {
         if (c.equals(Paciente.class))
         {
             for (Object v : findAll(c))
             {
                 Paciente ven = (Paciente) v;
-                if (ven.getId().equals((id.toString())))
+                if (ven.getId().equals((id)))
                 {
                     return ven;
                 }

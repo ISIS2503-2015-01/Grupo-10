@@ -16,7 +16,7 @@ public interface IServicioDoctores
 {
  public void agregarDoctor(Doctor doctor) throws Exception;
     
-    public void eliminarDoctor(Long id) throws Exception;
+    public void eliminarDoctor(String id) throws Exception;
     
     public List<Doctor> getDoctores();   
 }

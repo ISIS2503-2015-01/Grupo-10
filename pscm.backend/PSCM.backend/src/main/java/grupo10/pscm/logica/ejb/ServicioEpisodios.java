@@ -53,8 +53,8 @@ public class ServicioEpisodios implements IServicioEpisodios
         
     }
 
-    @Override
-    public void eliminarEpisodio(Long id) throws Exception 
+  
+    public void eliminarEpisodio(String id) throws Exception 
     {
         Episodio episodio=(Episodio) persistencia.findById(Episodio.class, id);
         try

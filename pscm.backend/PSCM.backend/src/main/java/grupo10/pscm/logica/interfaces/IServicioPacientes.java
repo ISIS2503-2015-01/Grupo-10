@@ -20,7 +20,7 @@ public interface IServicioPacientes {
     
     public Paciente getPaciente(String id);
     
-    public void eliminarPaciente(Long id) throws Exception;
+    public void eliminarPaciente (String id) throws Exception;
     
     public List<Paciente> getPacientes();
     

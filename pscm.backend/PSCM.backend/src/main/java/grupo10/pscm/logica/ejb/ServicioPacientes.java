@@ -59,8 +59,8 @@ public class ServicioPacientes implements IServicioPacientes
         
     }
 
-    @Override
-    public void eliminarPaciente(Long id) throws Exception 
+    
+    public void eliminarPaciente(String id) throws Exception 
     {
         Paciente p=(Paciente) persistencia.findById(Paciente.class, id);
         try
@@ -95,7 +95,7 @@ public class ServicioPacientes implements IServicioPacientes
     @Override
     public Paciente getPaciente(String id)
     {
-        return (Paciente) persistencia.findById(Paciente.class, id);
+        return (Paciente) persistencia.findById(Paciente.class,id);
     }
     
 }
