@@ -16,6 +16,8 @@ import java.util.List;
 public interface IServicioEpisodios
 {
  public void agregarEpisodio(Episodio episodio) throws Exception;
+ 
+ public Episodio getEpisodio(String id);
     
     public void eliminarEpisodio(Long id) throws Exception;
     

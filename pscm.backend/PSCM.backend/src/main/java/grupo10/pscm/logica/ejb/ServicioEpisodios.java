@@ -72,6 +72,11 @@ public class ServicioEpisodios implements IServicioEpisodios
     {
         return (ArrayList<Episodio>) persistencia.findAll(Episodio.class);
     }
+
+    @Override
+    public Episodio getEpisodio(String id) {
+        return (Episodio) persistencia.findById(Episodio.class, id);
+    }
     
     
 }

@@ -55,6 +55,7 @@ public class ServicioPersistenciaMock {
             //TODO Agregar pacientes con episodios
     //TODO Agregar episodios
             Paciente p1 = new Paciente("Pedro", "Perez", "3105559662", "1", "5559356", "M", "Calle Falsa 123");
+            //TODO agregar ep
             pacientes.add(p1);
             Paciente p2 = new Paciente("Ana", "Rodrigeuz", "3125467895", "2", "5551234", "F", "Calle Falsa 243");
             pacientes.add(p2);
