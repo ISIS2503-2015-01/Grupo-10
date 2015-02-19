@@ -20,9 +20,7 @@ public class Doctor
     @Id   
     private Long id;
     
-    private String apellido;
-    
-    private int numeroPacientes;  
+    private String apellido;  
   
     private String  nombre;      
       
@@ -34,8 +32,11 @@ public class Doctor
 
      /**
      * Constructor de la clase con argumentos
-     * @param nombre Nombre del usuario
-     * @param contraseña Constraseña del usuario
+     * @param nombreN Nombre del usuario
+     * @param apellidoN Apellido del usuario
+     * @param contrasenaN Constraseña del usuario
+     * @param identificacionN Identifiacion del usuario
+     * @param telefonoC Telefono del usuario
      */
     
     public Doctor(String nombreN,String apellidoN,String contrasenaN,Long identificacionN,String telefonoC)
@@ -45,7 +46,7 @@ public class Doctor
         contrasena=contrasenaN;
         id=identificacionN;
         telefonoContacto=telefonoC;     
-        ArrayList<Paciente> pacientes =new ArrayList<Paciente>();
+        pacientes =new ArrayList<Paciente>();
     }
     
    //-----------------------------------------------------------
@@ -115,7 +116,7 @@ public class Doctor
             
             for (Episodio epi : episodios) 
             {
-                if(epi.getId() == id)
+                if(epi.getId().compareTo(id) ==0)
                 {
                     resultado.add(epi);
                 }

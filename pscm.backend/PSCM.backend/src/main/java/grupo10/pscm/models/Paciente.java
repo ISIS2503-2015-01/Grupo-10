@@ -46,7 +46,7 @@ public class Paciente
         telefonoFijo=telefonoF;
         genero=generoN;
         direccion=direccionN;
-        ArrayList<Episodio> episodios =new ArrayList<Episodio>();
+        episodios =new ArrayList<Episodio>();
     }
 
     public Long getId() {
