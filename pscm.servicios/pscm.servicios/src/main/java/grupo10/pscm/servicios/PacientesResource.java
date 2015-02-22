@@ -8,6 +8,7 @@ package grupo10.pscm.servicios;
 import grupo10.pscm.exceptions.OperacionFallidaException;
 import grupo10.pscm.logica.ejb.ServicioPacientes;
 import grupo10.pscm.models.Paciente;
+import grupo10.pscm.models.PacienteDTO;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,12 +70,13 @@ public class PacientesResource {
     @POST
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addPaciente(Paciente paciente)
+    public Response addPaciente(PacienteDTO paciente)
     {
         try
         {
-            servPacientes.agregarPaciente(paciente);
-            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(paciente).build();
+            Paciente p = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getTelefonoCelular(), paciente.getId(), paciente.getTelefonoFijo(), paciente.getGenero(), paciente.getDireccion());
+            servPacientes.agregarPaciente(p);
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(p).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -85,12 +87,13 @@ public class PacientesResource {
     @PUT
     @Path("/edit")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editPaciente(Paciente paciente)
+    public Response editPaciente(PacienteDTO paciente)
     {
         try
         {
-            servPacientes.actualizarPaciente(paciente);
-            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(paciente).build();
+            Paciente p = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getTelefonoCelular(), paciente.getId(), paciente.getTelefonoFijo(), paciente.getGenero(), paciente.getDireccion());
+            servPacientes.actualizarPaciente(p);
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(p).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

@@ -7,6 +7,7 @@ package grupo10.pscm.servicios;
 
 import grupo10.pscm.logica.ejb.ServicioDoctores;
 import grupo10.pscm.models.Doctor;
+import grupo10.pscm.models.DoctorDTO;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -66,12 +67,13 @@ public class DoctoresResource {
     @POST
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addDoctor(Doctor doctor)
+    public Response addDoctor(DoctorDTO doctor)
     {
         try
         {
-            servDoctores.agregarDoctor(doctor);
-            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctor).build();
+            Doctor d = new Doctor(doctor.getNombre(), doctor.getApellido(), doctor.getContrasena(), doctor.getId(), doctor.getTelefonoC());
+            servDoctores.agregarDoctor(d);
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(d).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -82,12 +84,13 @@ public class DoctoresResource {
     @PUT
     @Path("/edit")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editDoctor(Doctor doctor)
+    public Response editDoctor(DoctorDTO doctor)
     {
         try
         {
-            servDoctores.actualizarDoctor(doctor);
-            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctor).build();
+            Doctor d = new Doctor(doctor.getNombre(), doctor.getApellido(), doctor.getContrasena(), doctor.getId(), doctor.getTelefonoC());
+            servDoctores.actualizarDoctor(d);
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(d).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

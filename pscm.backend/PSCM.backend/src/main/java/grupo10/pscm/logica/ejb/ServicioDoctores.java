@@ -79,7 +79,7 @@ public class ServicioDoctores implements IServicioDoctores
     
      public void actualizarDoctor(Doctor doctor)
     {
-        persistencia.update(this);
+        persistencia.update(doctor);
     }
 
     @Override

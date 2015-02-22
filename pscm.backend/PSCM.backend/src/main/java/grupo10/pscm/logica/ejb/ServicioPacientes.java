@@ -84,8 +84,6 @@ public class ServicioPacientes implements IServicioPacientes
         
     }
     
-    
-    
     public void actualizarPaciente(Paciente paciente)
     {
         persistencia.update(paciente);

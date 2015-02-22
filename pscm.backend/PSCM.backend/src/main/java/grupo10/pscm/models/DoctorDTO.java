@@ -24,11 +24,6 @@ public class DoctorDTO {
       
     private ArrayList<Paciente> pacientes;
 
-    public DoctorDTO()
-    {
-        
-    }
-    
    //-----------------------------------------------------------
     // Getters y setters
     //-----------------------------------------------------------

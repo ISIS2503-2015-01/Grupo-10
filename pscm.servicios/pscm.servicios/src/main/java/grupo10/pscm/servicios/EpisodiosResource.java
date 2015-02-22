@@ -7,6 +7,7 @@ package grupo10.pscm.servicios;
 
 import grupo10.pscm.logica.ejb.ServicioEpisodios;
 import grupo10.pscm.models.Episodio;
+import grupo10.pscm.models.EpisodioDTO;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -75,12 +76,13 @@ public class EpisodiosResource {
     @POST
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addEpisodio(Episodio episodio)
+    public Response addEpisodio(EpisodioDTO episodio)
     {
         try
         {
-            servEpisodios.agregarEpisodio(episodio);
-            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodio).build();
+            Episodio e = new Episodio(episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getId(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
+            servEpisodios.agregarEpisodio(e);
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(e).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
