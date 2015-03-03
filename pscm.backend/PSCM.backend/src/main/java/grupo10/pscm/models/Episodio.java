@@ -6,22 +6,51 @@
 package grupo10.pscm.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
 
 /**
  *
  * @author estudiante
  */
+@NoSql(dataFormat=DataFormatType.MAPPED)
+@Entity
+@XmlRootElement
 public class Episodio 
 {
     
-     private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     
-   
-    @Id   
+    @Id
+    @GeneratedValue
+    @Field(name="_id")
     private String id;
     
+    @NotNull
+    @Column(name = "create_at", updatable = false)
+    @Temporal(TemporalType.DATE)
+    private Calendar createdAt;
+
+    @NotNull
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.DATE)
+    private Calendar updatedAt;
+    
+    private String idPaciente;
+
     private Date fechaEpisodio;
     
     private String nivelDolor;  
@@ -45,12 +74,11 @@ public class Episodio
     private String posiblesCausas;
     
     
-    public Episodio(Date fechaE,String nivelD,String horaE,String idN,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
+    public Episodio(Date fechaE,String nivelD,String horaE,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
     {
         fechaEpisodio=fechaE;
         nivelDolor=nivelD;
         hora=horaE;            
-        id=idN;  
         patronSueno=patronN;
         alimentos=alimentosN;
         bebidas=bebidasN;
@@ -58,6 +86,30 @@ public class Episodio
         medicamentos=medicamentoN;
     }
 
+    public Episodio()
+    {
+        
+    }
+    
+    @PreUpdate
+    private void updateTimestamp() {
+        this.updatedAt = Calendar.getInstance();
+    }
+
+    @PrePersist
+    private void creationTimestamp() {
+        this.createdAt = this.updatedAt = Calendar.getInstance();
+    }
+    
+    public String getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(String idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+    
+    
     public ArrayList<String> getAlimentos() {
         return alimentos;
     }

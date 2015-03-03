@@ -17,6 +17,8 @@ public class EpisodioDTO
 {
     private String id;
     
+    private String idPaciente;
+    
     private Date fechaEpisodio;
     
     private String nivelDolor;  
@@ -39,6 +41,14 @@ public class EpisodioDTO
     
     private String posiblesCausas;
 
+    public String getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(String idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+    
     public ArrayList<String> getAlimentos() {
         return alimentos;
     }

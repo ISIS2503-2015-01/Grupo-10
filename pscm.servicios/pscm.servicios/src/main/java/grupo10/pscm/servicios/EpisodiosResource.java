@@ -56,13 +56,13 @@ public class EpisodiosResource {
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
     }
 
-    @GET
-    @Path("/paciente")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getEpisodiosPaciente(@QueryParam("id") String code ) {
-        List<Episodio> episodios = servEpisodios.getEpisodiosPaciente(code);
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
-    }
+//    @GET
+//    @Path("/paciente")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getEpisodiosPaciente(@QueryParam("id") String code ) {
+//        List<Episodio> episodios = servEpisodios.getEpisodiosPaciente(code);
+//        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
+//    }
     
     @GET
     @Path("/get")
@@ -80,7 +80,7 @@ public class EpisodiosResource {
     {
         try
         {
-            Episodio e = new Episodio(episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getId(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
+            Episodio e = new Episodio(episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
             servEpisodios.agregarEpisodio(e);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(e).build();
         } catch (Exception e) {
@@ -95,7 +95,6 @@ public class EpisodiosResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deletePaciente(@QueryParam("id") String code )
     {
-        //TODO not working, check why
         try
         {
             servEpisodios.eliminarEpisodio(code);

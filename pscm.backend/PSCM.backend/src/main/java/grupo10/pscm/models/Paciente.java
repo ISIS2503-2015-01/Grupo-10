@@ -6,8 +6,19 @@
 package grupo10.pscm.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
 
 /**
  *
@@ -17,8 +28,6 @@ public class Paciente
 {
      private static final long serialVersionUID = 1L;
     
-   
-    @Id   
     private String id;
     
     private String apellido;
@@ -33,7 +42,7 @@ public class Paciente
     
     private String telefonoCelular;  
      
-    private ArrayList<Episodio> episodios;
+    //private ArrayList<Episodio> episodios;
 
     
     
@@ -46,9 +55,14 @@ public class Paciente
         telefonoFijo=telefonoF;
         genero=generoN;
         direccion=direccionN;
-        episodios =new ArrayList<Episodio>();
+        //episodios =new ArrayList<Episodio>();
     }
 
+    public Paciente()
+    {
+        
+    }
+    
     public String getId() {
         return id;
     }
@@ -105,19 +119,19 @@ public class Paciente
         this.telefonoCelular = telefonoCelular;
     }
     
-    public void setEpisodios(ArrayList<Episodio>episodios)
-    {
-        this.episodios=episodios;
-    }
-    public void createEpisodio(Episodio episodio)
-    {
-        
-        
-        this.episodios.add(episodio);
-    }
-    
-    public ArrayList<Episodio> getEpisodios()
-    {
-        return this.episodios;
-    }
+//    public void setEpisodios(ArrayList<Episodio>episodios)
+//    {
+//        this.episodios=episodios;
+//    }
+//    public void createEpisodio(Episodio episodio)
+//    {
+//        
+//        
+//        this.episodios.add(episodio);
+//    }
+//    
+//    public ArrayList<Episodio> getEpisodios()
+//    {
+//        return this.episodios;
+//    }
 }

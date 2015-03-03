@@ -10,11 +10,14 @@ import grupo10.pscm.logica.interfaces.IServicioEpisodios;
 import grupo10.pscm.models.Episodio;
 import grupo10.pscm.models.Paciente;
 import grupo10.pscm.persistencia.*;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
 import javax.ejb.EJB;
+import javax.persistence.Query;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -24,9 +27,11 @@ import javax.ejb.EJB;
 public class ServicioEpisodios implements IServicioEpisodios
 {
 
-    @EJB
-    private ServicioPersistenciaMock persistencia;
+//    @EJB
+//    private ServicioPersistenciaMock persistencia;
     
+    @PersistenceContext(unitName = "mongoPU")
+    EntityManager entityManager;
     
     //----------------------------
     //Metodos
@@ -34,59 +39,74 @@ public class ServicioEpisodios implements IServicioEpisodios
     
     public ServicioEpisodios()
     {
-        persistencia = new ServicioPersistenciaMock();
+        //persistencia = new ServicioPersistenciaMock();
     }
 
     @Override
-    public void agregarEpisodio(Episodio episodio) throws Exception 
+    public Episodio agregarEpisodio(Episodio episodio) throws Exception 
     {
-         try
+        Episodio e = episodio;
+        try 
         {
-            //if(episodio.getId()>0)
-            //{
-                persistencia.create(episodio);
-            //}
-            //else
-            //{
-            //    throw new OperacionFallidaException("El número de documento no es válido ó debe regitrar un nombre valido");
-            //}
+            entityManager.getTransaction().begin();
+            entityManager.persist(e);
+            entityManager.getTransaction().commit();
+            entityManager.refresh(e);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e = null;
+        } finally {
+        	entityManager.clear();
+        	entityManager.close();
         }
-        catch (OperacionFallidaException ex)
-        {
-            throw new OperacionFallidaException(ex.getMessage());
-        }
-        
+            
+        return e;
     }
 
   
     public void eliminarEpisodio(String id) throws Exception 
     {
-        Episodio episodio=(Episodio) persistencia.findById(Episodio.class, id);
         try
         {
-            persistencia.delete(episodio);
+            entityManager.getTransaction().begin();
+            Query q = entityManager.createQuery("DELETE FROM Episodio e WHERE e.id="+id);
+            int deleted = q.executeUpdate();
+            entityManager.getTransaction().commit();
         } 
-        catch (OperacionFallidaException e)
+        catch (Exception e)
         {
-            throw new OperacionFallidaException("No se pudo eliminar el doctor");
+            throw new OperacionFallidaException("No se pudo eliminar el episodio");
+        } finally {
+            entityManager.clear();
+            entityManager.close();
         }
     }
 
     @Override
     public List<Episodio> getEpisodios() 
     {
-        return (ArrayList<Episodio>) persistencia.findAll(Episodio.class);
+        Query q = entityManager.createQuery("select u from Episodio u order by u.id ASC");
+        List<Episodio> episodios = q.getResultList();
+        
+        return episodios;
     }
 
     @Override
     public Episodio getEpisodio(String id) {
-        return (Episodio) persistencia.findById(Episodio.class, id);
+        
+        Query q = entityManager.createQuery("SELECT e FROM Episodio e WHERE e.id="+id+"");
+        Episodio ep = (Episodio) q.getSingleResult();
+        return ep;
     }
 
     @Override
     public List<Episodio> getEpisodiosPaciente(String id) {
-        Paciente p = (Paciente) persistencia.findById(Paciente.class, id);
-        return p.getEpisodios();
+        Query q = entityManager.createQuery("SELECT e FROM Episodio e WHERE e.idPaciente="+id+"");
+        List<Episodio> episodios = q.getResultList();
+        return episodios;
     }
     
     
