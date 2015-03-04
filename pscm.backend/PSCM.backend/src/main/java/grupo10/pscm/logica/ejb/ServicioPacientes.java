@@ -7,6 +7,8 @@ package grupo10.pscm.logica.ejb;
 
 import grupo10.pscm.exceptions.OperacionFallidaException;
 import grupo10.pscm.logica.interfaces.IServicioPacientes;
+import grupo10.pscm.models.Doctor;
+import grupo10.pscm.models.Episodio;
 import grupo10.pscm.models.Paciente;
 import grupo10.pscm.persistencia.*;
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ import java.util.List;
 
 import javax.ejb.Stateful;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -23,13 +28,15 @@ import javax.ejb.EJB;
 public class ServicioPacientes implements IServicioPacientes
 {
 
-    @EJB
-    private ServicioPersistenciaMock persistencia;
+   // @EJB
+   // private ServicioPersistenciaMock persistencia;
     
+    @PersistenceContext(unitName = "mongoPU")
+    EntityManager entityManager;
     
     public ServicioPacientes()
     {
-        persistencia = new ServicioPersistenciaMock();
+       //  persistencia = new ServicioPersistenciaMock();
     }
     
     //----------------------------
@@ -37,38 +44,44 @@ public class ServicioPacientes implements IServicioPacientes
     //----------------------------
     
     @Override
-    public void agregarPaciente(Paciente paciente) throws Exception 
-    {
-        
-        try
+    public Paciente agregarPaciente(Paciente paciente) throws Exception 
+    {       
+       Paciente p = paciente;
+        try 
         {
-            //if(paciente.getId()>0)
-            //{
-                persistencia.create(paciente);
-            //}
-           // else
-            //{
-               // throw new OperacionFallidaException("El número de documento no es válido");
-            //}
-        }
-        catch (OperacionFallidaException ex)
-        {
-            throw new OperacionFallidaException(ex.getMessage());
-        }
-        
+            entityManager.getTransaction().begin();
+            entityManager.persist(p);
+            entityManager.getTransaction().commit();
+            entityManager.refresh(p);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            p = null;
+        } finally {
+        	entityManager.clear();
+        	entityManager.close();
+        }          
+           return p;
     }
 
     
     public void eliminarPaciente(String id) throws Exception 
     {
-        Paciente p=(Paciente) persistencia.findById(Paciente.class, id);
-        try
+       try
         {
-            persistencia.delete(p);
+            entityManager.getTransaction().begin();
+            Query q = entityManager.createQuery("DELETE FROM Paciente p WHERE p.id="+id);
+            int deleted = q.executeUpdate();
+            entityManager.getTransaction().commit();
         } 
-        catch (OperacionFallidaException ex)
+        catch (Exception e)
         {
-            throw new OperacionFallidaException("No se pudo eliminar al paciente");
+            throw new OperacionFallidaException("No se pudo eliminar el pacientirijillo");
+        } finally {
+            entityManager.clear();
+            entityManager.close();
         }
          
     }
@@ -78,21 +91,40 @@ public class ServicioPacientes implements IServicioPacientes
     {
        
         
-        return persistencia.findAll(Paciente.class);
+        Query q = entityManager.createQuery("select u from Paciente u order by u.id ASC");
+        List<Paciente> pacientes = q.getResultList();
+        
+        return pacientes;
        
        
         
     }
     
-    public void actualizarPaciente(Paciente paciente)
+    public void actualizarPaciente(Paciente paciente)throws Exception
     {
-        persistencia.update(paciente);
-    }
+       Paciente p=paciente;
+        try
+        {
+            entityManager.getTransaction().begin();           
+            entityManager.refresh(p);
+            entityManager.getTransaction().commit();
+        } 
+        catch (Exception e)
+        {
+            throw new OperacionFallidaException("No se pudo actualizar al doctor ");
+        } finally {
+            entityManager.clear();
+            entityManager.close();
+        }
+    }        
+    
 
     @Override
     public Paciente getPaciente(String id)
     {
-        return (Paciente) persistencia.findById(Paciente.class,id);
+        Query q = entityManager.createQuery("SELECT p FROM Paciente p WHERE p.id="+id+"");
+        Paciente p = (Paciente) q.getSingleResult();
+        return p;
     }
     
 }

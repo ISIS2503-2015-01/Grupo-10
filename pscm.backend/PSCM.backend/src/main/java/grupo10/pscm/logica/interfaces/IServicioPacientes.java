@@ -16,7 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface IServicioPacientes {
     
-    public void agregarPaciente(Paciente paciente) throws Exception;
+    public Paciente agregarPaciente(Paciente paciente) throws Exception;
     
     public Paciente getPaciente(String id);
     

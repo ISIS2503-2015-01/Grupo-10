@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface IServicioDoctores
 {
- public void agregarDoctor(Doctor doctor) throws Exception;
+ public Doctor agregarDoctor(Doctor doctor) throws Exception;
  
  public Doctor getDoctor(String id);
  

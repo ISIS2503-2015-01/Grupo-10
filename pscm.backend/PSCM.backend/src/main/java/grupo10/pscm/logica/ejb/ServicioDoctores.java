@@ -8,12 +8,16 @@ package grupo10.pscm.logica.ejb;
 import grupo10.pscm.exceptions.OperacionFallidaException;
 import grupo10.pscm.logica.interfaces.IServicioDoctores;
 import grupo10.pscm.models.Doctor;
+import grupo10.pscm.models.Episodio;
 import grupo10.pscm.persistencia.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -23,11 +27,15 @@ import javax.ejb.EJB;
 public class ServicioDoctores implements IServicioDoctores
 {
 
-    @EJB
-    private ServicioPersistenciaMock persistencia;
+  //  @EJB
+  //  private ServicioPersistenciaMock persistencia;
     
-    public ServicioDoctores() {
-        persistencia = new ServicioPersistenciaMock();
+    @PersistenceContext(unitName = "mongoPU")
+    EntityManager entityManager;
+    
+    public ServicioDoctores() 
+    {
+       // persistencia = new ServicioPersistenciaMock();
     }
     
     //----------------------------
@@ -35,55 +43,84 @@ public class ServicioDoctores implements IServicioDoctores
     //----------------------------
     
 
+   
     @Override
-    public void agregarDoctor(Doctor doctor) throws Exception 
-    {
-         try
+    public Doctor agregarDoctor(Doctor doctor) throws Exception 
+   {
+        Doctor d = doctor;
+        try 
         {
-            if(doctor.getNombre()!=null) //TODO check ID later
-            {
-
-            persistencia.create(doctor);
+            entityManager.getTransaction().begin();
+            entityManager.persist(d);
+            entityManager.getTransaction().commit();
+            entityManager.refresh(d);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
             }
-            else
-            {
-                throw new OperacionFallidaException("El número de documento no es válido ó debe regitrar un nombre valido");
-            }
+            d = null;
+        } finally {
+        	entityManager.clear();
+        	entityManager.close();
         }
-        catch (OperacionFallidaException ex)
-        {
-            throw new OperacionFallidaException(ex.getMessage());
-        }
-        
+            
+        return d;
     }
 
     
     public void eliminarDoctor(String id) throws Exception 
     {
-        Doctor doctor=(Doctor) persistencia.findById(Doctor.class, id);
         try
         {
-            persistencia.delete(doctor);
+            entityManager.getTransaction().begin();
+            Query q = entityManager.createQuery("DELETE FROM Doctor d WHERE d.id="+id);
+            int deleted = q.executeUpdate();
+            entityManager.getTransaction().commit();
         } 
-        catch (OperacionFallidaException e)
+        catch (Exception e)
         {
-            throw new OperacionFallidaException("No se pudo eliminar el doctor");
+            throw new OperacionFallidaException("No se pudo eliminar el doctor deseado");
+        } finally {
+            entityManager.clear();
+            entityManager.close();
         }
     }
 
     @Override
     public List<Doctor> getDoctores() 
     {
-        return (ArrayList<Doctor>) persistencia.findAll(Doctor.class);
+      Query q = entityManager.createQuery("select u from Doctor u order by u.id ASC");
+      List<Doctor> doctores = q.getResultList();
+        
+        return doctores;
     }
     
-     public void actualizarDoctor(Doctor doctor)
-    {
-        persistencia.update(doctor);
-    }
+     public void actualizarDoctor(Doctor doctor) throws Exception   
+       {
+           Doctor d=doctor;
+        try
+        {
+            entityManager.getTransaction().begin();           
+            entityManager.refresh(d);
+            entityManager.getTransaction().commit();
+        } 
+        catch (Exception e)
+        {
+            throw new OperacionFallidaException("No se pudo actualizar al doctor ");
+        } finally {
+            entityManager.clear();
+            entityManager.close();
+        }
+    }        
+              
+    
 
     @Override
-    public Doctor getDoctor(String id) {
-        return (Doctor) persistencia.findById(Doctor.class,id);
+    public Doctor getDoctor(String id) 
+    {
+        Query q = entityManager.createQuery("SELECT d FROM Doctor d WHERE d.id="+id+"");
+        Doctor doctorcito = (Doctor) q.getSingleResult();
+        return doctorcito;
     }
 }

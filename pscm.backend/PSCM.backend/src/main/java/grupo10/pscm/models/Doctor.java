@@ -19,14 +19,17 @@ import org.eclipse.persistence.nosql.annotations.*;
 public class Doctor 
 {
     private static final long serialVersionUID = 1L;
-   
-    private String id;
     
+    @Id
+    @GeneratedValue
+    @Field(name="_id")
+    private String id;    
     
     private String apellido;  
   
     private String  nombre;      
-      
+   
+    @NotNull
     private String contrasena;
     
     private String telefonoContacto;
