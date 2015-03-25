@@ -56,6 +56,22 @@ public class EpisodiosResource {
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
     }
 
+    @PUT
+    @Path("/update")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateEpisodio(EpisodioDTO episodio)
+    {
+        try
+        {
+            Episodio e = new Episodio(episodio.getIdPaciente(), episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
+            servEpisodios.actualizarEpisodio(e);
+            return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(e).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
     @GET
     @Path("/paciente")
     @Produces(MediaType.APPLICATION_JSON)
@@ -80,14 +96,13 @@ public class EpisodiosResource {
     {
         try
         {
-            Episodio e = new Episodio(episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
+            Episodio e = new Episodio(episodio.getIdPaciente(), episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
             servEpisodios.agregarEpisodio(e);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(e).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
-        //TODO Check if this works
     }
     
     @DELETE

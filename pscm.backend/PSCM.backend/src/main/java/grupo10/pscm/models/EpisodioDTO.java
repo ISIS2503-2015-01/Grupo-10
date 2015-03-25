@@ -15,9 +15,9 @@ import javax.persistence.Id;
  */
 public class EpisodioDTO 
 {
-    private String id;
+    private int id;
     
-    private String idPaciente;
+    private int idPaciente;
     
     private String fechaEpisodio;
     
@@ -41,11 +41,11 @@ public class EpisodioDTO
     
     private String posiblesCausas;
 
-    public String getIdPaciente() {
+    public int getIdPaciente() {
         return idPaciente;
     }
 
-    public void setIdPaciente(String idPaciente) {
+    public void setIdPaciente(int idPaciente) {
         this.idPaciente = idPaciente;
     }
     
@@ -81,11 +81,11 @@ public class EpisodioDTO
         this.actividadFisica = actividadFisica;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -89,6 +89,24 @@ public class ServicioEpisodios implements IServicioEpisodios
             entityManager.close();
         }
     }
+    
+    public void actualizarEpisodio(Episodio episodio)throws Exception
+    {
+       Episodio ep=episodio;
+        try
+        {
+            entityManager.getTransaction().begin();           
+            entityManager.refresh(ep);
+            entityManager.getTransaction().commit();
+        } 
+        catch (Exception e)
+        {
+            throw new OperacionFallidaException("No se pudo actualizar el episodio ");
+        } finally {
+            entityManager.clear();
+            entityManager.close();
+        }
+    }
 
     @Override
     public List<Episodio> getEpisodios() 

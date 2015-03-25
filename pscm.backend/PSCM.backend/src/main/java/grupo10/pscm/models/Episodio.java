@@ -50,7 +50,7 @@ public class Episodio
     @Temporal(TemporalType.DATE)
     private Calendar updatedAt;
     
-    private String idPaciente;
+    private int idPaciente;
 
     private String fechaEpisodio;
     
@@ -75,8 +75,9 @@ public class Episodio
     private String posiblesCausas;
     
     
-    public Episodio(String fechaE,String nivelD,String horaE,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
+    public Episodio(int idPacienteN, String fechaE,String nivelD,String horaE,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
     {
+        idPaciente=idPacienteN;
         fechaEpisodio=fechaE;
         nivelDolor=nivelD;
         hora=horaE;            
@@ -102,11 +103,11 @@ public class Episodio
         this.createdAt = this.updatedAt = Calendar.getInstance();
     }
     
-    public String getIdPaciente() {
+    public int getIdPaciente() {
         return idPaciente;
     }
 
-    public void setIdPaciente(String idPaciente) {
+    public void setIdPaciente(int idPaciente) {
         this.idPaciente = idPaciente;
     }
     
