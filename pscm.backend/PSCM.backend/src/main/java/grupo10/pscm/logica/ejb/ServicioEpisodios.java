@@ -30,8 +30,8 @@ public class ServicioEpisodios implements IServicioEpisodios
 //    @EJB
 //    private ServicioPersistenciaMock persistencia;
     
-    @PersistenceContext(unitName = "mongoPU")
-    EntityManager entityManager;
+    //@PersistenceContext(unitName = "mentalPU")
+    EntityManager entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
     
     //----------------------------
     //Metodos
@@ -40,6 +40,11 @@ public class ServicioEpisodios implements IServicioEpisodios
     public ServicioEpisodios()
     {
         //persistencia = new ServicioPersistenciaMock();
+//        try {
+//            entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

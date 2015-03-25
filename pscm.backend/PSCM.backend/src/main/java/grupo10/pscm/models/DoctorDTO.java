@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author estudiante
  */
 public class DoctorDTO {
-    private String id;
+    private int id;
     
     private String apellido;  
   
@@ -58,12 +58,12 @@ public class DoctorDTO {
         this.telefonoContacto = tel;
     }
 
-    public String getId() 
+    public int getId() 
     {
         return id;
     }
 
-    public void setIdentificacion(String ide) {
+    public void setIdentificacion(int ide) {
         this.id = ide;
     }
     

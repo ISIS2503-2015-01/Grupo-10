@@ -19,7 +19,7 @@ public class EpisodioDTO
     
     private String idPaciente;
     
-    private Date fechaEpisodio;
+    private String fechaEpisodio;
     
     private String nivelDolor;  
   
@@ -89,11 +89,11 @@ public class EpisodioDTO
         this.id = id;
     }
 
-    public Date getFechaEpisodio() {
+    public String getFechaEpisodio() {
         return fechaEpisodio;
     }
 
-    public void setFechaEpisodio(Date fechaEpisodio) {
+    public void setFechaEpisodio(String fechaEpisodio) {
         this.fechaEpisodio = fechaEpisodio;
     }
 

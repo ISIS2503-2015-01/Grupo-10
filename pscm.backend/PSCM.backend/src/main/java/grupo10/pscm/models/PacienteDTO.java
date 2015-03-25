@@ -15,7 +15,7 @@ import javax.persistence.Id;
  */
 public class PacienteDTO 
 {
-    private String id;
+    private int id;
     
     private String apellido;
     
@@ -29,10 +29,10 @@ public class PacienteDTO
     
     private String telefonoCelular;  
      
-    private ArrayList<Episodio> episodios;
+    //private ArrayList<Episodio> episodios;
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -60,7 +60,7 @@ public class PacienteDTO
         return telefonoCelular;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -88,19 +88,19 @@ public class PacienteDTO
         this.telefonoCelular = telefonoCelular;
     }
     
-    public void setEpisodios(ArrayList<Episodio>episodios)
-    {
-        this.episodios=episodios;
-    }
-    public void createEpisodio(Episodio episodio)
-    {
-        
-        
-        this.episodios.add(episodio);
-    }
-    
-    public ArrayList<Episodio> getEpisodios()
-    {
-        return this.episodios;
-    }
+//    public void setEpisodios(ArrayList<Episodio>episodios)
+//    {
+//        this.episodios=episodios;
+//    }
+//    public void createEpisodio(Episodio episodio)
+//    {
+//        
+//        
+//        this.episodios.add(episodio);
+//    }
+//    
+//    public ArrayList<Episodio> getEpisodios()
+//    {
+//        return this.episodios;
+//    }
 }

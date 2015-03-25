@@ -109,7 +109,7 @@ public class PacientesResource {
         try
         {
             servPacientes.eliminarPaciente(code);
-            List<Paciente> pacientes = servPacientes.getPacientes();
+            List<Paciente> pacientes = servPacientes.getPacientes(); //TODO maybe delete this line
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacientes).build();
         } catch (Exception e) {
             e.printStackTrace();

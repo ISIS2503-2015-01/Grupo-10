@@ -31,12 +31,17 @@ public class ServicioPacientes implements IServicioPacientes
    // @EJB
    // private ServicioPersistenciaMock persistencia;
     
-    @PersistenceContext(unitName = "mongoPU")
-    EntityManager entityManager;
+    //@PersistenceContext(unitName = "mentalPU")
+    EntityManager entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
     
     public ServicioPacientes()
     {
        //  persistencia = new ServicioPersistenciaMock();
+//        try {
+//            entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     
     //----------------------------
@@ -46,6 +51,13 @@ public class ServicioPacientes implements IServicioPacientes
     @Override
     public Paciente agregarPaciente(Paciente paciente) throws Exception 
     {       
+//        try
+//        {
+//            entityManager.persist(paciente);
+//            
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
        Paciente p = paciente;
         try 
         {
@@ -63,7 +75,7 @@ public class ServicioPacientes implements IServicioPacientes
         	entityManager.clear();
         	entityManager.close();
         }          
-           return p;
+           return paciente;
     }
 
     

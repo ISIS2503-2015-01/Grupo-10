@@ -56,13 +56,13 @@ public class EpisodiosResource {
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
     }
 
-//    @GET
-//    @Path("/paciente")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getEpisodiosPaciente(@QueryParam("id") String code ) {
-//        List<Episodio> episodios = servEpisodios.getEpisodiosPaciente(code);
-//        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
-//    }
+    @GET
+    @Path("/paciente")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEpisodiosPaciente(@QueryParam("id") String code ) {
+        List<Episodio> episodios = servEpisodios.getEpisodiosPaciente(code);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
+    }
     
     @GET
     @Path("/get")

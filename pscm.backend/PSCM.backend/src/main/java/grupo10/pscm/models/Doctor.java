@@ -16,14 +16,15 @@ import org.eclipse.persistence.nosql.annotations.*;
  *
  * @author estudiante
  */
+@Entity
 public class Doctor 
 {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Field(name="_id")
-    private String id;    
+    private int id;    
     
     private String apellido;  
   
@@ -45,7 +46,7 @@ public class Doctor
      * @param telefonoC Telefono del usuario
      */
     
-    public Doctor(String nombreN,String apellidoN,String contrasenaN,String identificacionN,String telefonoC)
+    public Doctor(String nombreN,String apellidoN,String contrasenaN,int identificacionN,String telefonoC)
     {
         nombre=nombreN;
         apellido=apellidoN;
@@ -95,12 +96,12 @@ public class Doctor
         this.telefonoContacto = tel;
     }
 
-    public String getId() 
+    public int getId() 
     {
         return id;
     }
 
-    public void setIdentificacion(String ide) {
+    public void setIdentificacion(int ide) {
         this.id = ide;
     }
     

@@ -30,12 +30,17 @@ public class ServicioDoctores implements IServicioDoctores
   //  @EJB
   //  private ServicioPersistenciaMock persistencia;
     
-    @PersistenceContext(unitName = "mongoPU")
-    EntityManager entityManager;
+    //@PersistenceContext(unitName = "mentalPU")
+    EntityManager entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
     
     public ServicioDoctores() 
     {
        // persistencia = new ServicioPersistenciaMock();
+//        try {
+//            entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     
     //----------------------------

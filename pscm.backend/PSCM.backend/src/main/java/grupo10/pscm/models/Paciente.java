@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,15 +25,16 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
  *
  * @author estudiante
  */
+@Entity
 public class Paciente 
 {
      private static final long serialVersionUID = 1L;
      
      
-     @Id
-    @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Field(name="_id")
-    private String id;
+    private int id;
     
     private String apellido;
     
@@ -48,9 +50,7 @@ public class Paciente
      
     //private ArrayList<Episodio> episodios;
 
-    
-    
-    public Paciente(String nombreN,String apellidoN,String telefonoC,String identificacionN,String telefonoF,String generoN,String direccionN)
+    public Paciente(String nombreN,String apellidoN,String telefonoC,int identificacionN,String telefonoF,String generoN,String direccionN)
     {
         nombre=nombreN;
         apellido=apellidoN;
@@ -67,7 +67,7 @@ public class Paciente
         
     }
     
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -95,7 +95,7 @@ public class Paciente
         return telefonoCelular;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

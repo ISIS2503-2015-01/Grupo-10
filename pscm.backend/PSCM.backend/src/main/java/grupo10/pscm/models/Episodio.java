@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -35,9 +36,9 @@ public class Episodio
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Field(name="_id")
-    private String id;
+    private int id;
     
     @NotNull
     @Column(name = "create_at", updatable = false)
@@ -51,7 +52,7 @@ public class Episodio
     
     private String idPaciente;
 
-    private Date fechaEpisodio;
+    private String fechaEpisodio;
     
     private String nivelDolor;  
   
@@ -74,7 +75,7 @@ public class Episodio
     private String posiblesCausas;
     
     
-    public Episodio(Date fechaE,String nivelD,String horaE,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
+    public Episodio(String fechaE,String nivelD,String horaE,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
     {
         fechaEpisodio=fechaE;
         nivelDolor=nivelD;
@@ -142,19 +143,19 @@ public class Episodio
         this.actividadFisica = actividadFisica;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Date getFechaEpisodio() {
+    public String getFechaEpisodio() {
         return fechaEpisodio;
     }
 
-    public void setFechaEpisodio(Date fechaEpisodio) {
+    public void setFechaEpisodio(String fechaEpisodio) {
         this.fechaEpisodio = fechaEpisodio;
     }
 
