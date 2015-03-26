@@ -50,31 +50,44 @@ public class Episodio
     @Temporal(TemporalType.DATE)
     private Calendar updatedAt;
     
+    // Id del paciente
     private int idPaciente;
 
+    // Fecha en la que se rpesenta el episoio
     private String fechaEpisodio;
     
+    // Nivel del dolor del apciente en el episodio de Migraña
     private String nivelDolor;  
   
+    // Hora en que se presenta el episodio
     private String  hora;
        
+    // Atributo que indica la localización de la migraña
     private String localizacion;
     
+    // Atributo que indica el aptron del sueño del paciente
     private String patronSueno;
     
+        
+  // Arreglo de Strings que indica los alimetnos  ingeridos por un paciente antes d eun episodiod e migraña
     private ArrayList <String> alimentos;  
     
+  // Arreglo de Strings que indica los medicamentos  ingeridos por un paciente antes d eun episodiod e migraña
     private ArrayList <String> medicamentos; 
      
+    // Arreglo de Strings que indica las bebidas ingeridas pro un paciente antes d eun episodiod e migraña
     private ArrayList <String> bebidas;
    
+    //Arreglo de Strings que tiene la actividad fisica d eun apciente
     private ArrayList <String> actividadFisica;    
-      
+    
+    //Notas de voz que tiene algun episodio
     private String notasMedico;
     
+    // Describe las posibles causas d eun episodio de migraña
     private String posiblesCausas;
     
-    
+    //Constructor de episodio que cuenta con atributos de id Paciente, fechaE,nivelID, patron N
     public Episodio(int idPacienteN, String fechaE,String nivelD,String horaE,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
     {
         idPaciente=idPacienteN;
