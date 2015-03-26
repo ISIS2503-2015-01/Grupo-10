@@ -101,15 +101,10 @@ public class ServicioPacientes implements IServicioPacientes
     @Override
     public List<Paciente> getPacientes() 
     {
-       
-        
         Query q = entityManager.createQuery("select u from Paciente u order by u.id ASC");
         List<Paciente> pacientes = q.getResultList();
         
         return pacientes;
-       
-       
-        
     }
     
     public void actualizarPaciente(Paciente paciente)throws Exception

@@ -1,0 +1,30 @@
+<table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>Genero</th>
+                        <th>Cantidad Episodios</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="paciente in this.getPacientes.pacientes | orderBy: 'id'">
+                            <td>{{paciente.nombre}}</td>
+                            <td>{{paciente.apellido}}</td>
+                            <td>{{paciente.genero}}</td>
+<!--                            <td>{{competitor.cantidadEpisodios}}</td>
+                            <td>{{verEpisodios}}</td>
+                            <td>{{competitor.cellphone}}</td>-->
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>Genero</th>
+                        <th>Cantidad Episodios</th>
+                      </tr>
+                    </tfoot>
+                  </table>
