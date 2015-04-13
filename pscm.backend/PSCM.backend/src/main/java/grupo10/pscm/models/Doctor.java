@@ -22,9 +22,7 @@ public class Doctor
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Field(name="_id")
-    private int id;    
+    private String documento;    
     
     private String apellido;  
   
@@ -46,12 +44,12 @@ public class Doctor
      * @param telefonoC Telefono del usuario
      */
     
-    public Doctor(String nombreN,String apellidoN,String contrasenaN,int identificacionN,String telefonoC)
+    public Doctor(String nombreN,String apellidoN,String contrasenaN,String nDocumento,String telefonoC)
     {
         nombre=nombreN;
         apellido=apellidoN;
         contrasena=contrasenaN;
-        id=identificacionN;
+        documento=nDocumento;
         telefonoContacto=telefonoC;     
         //pacientes =new ArrayList<Paciente>();
     }
@@ -96,13 +94,13 @@ public class Doctor
         this.telefonoContacto = tel;
     }
 
-    public int getId() 
+    public String getDocumento() 
     {
-        return id;
+        return documento;
     }
 
-    public void setIdentificacion(int ide) {
-        this.id = ide;
+    public void setDocumento(String nDocumento) {
+        this.documento = nDocumento;
     }
     
     public String getContrasena() 

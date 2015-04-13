@@ -51,7 +51,7 @@ public class Episodio
     private Calendar updatedAt;
     
     // Id del paciente
-    private int idPaciente;
+    private String documentoPaciente;
 
     // Fecha en la que se rpesenta el episoio
     private String fechaEpisodio;
@@ -88,9 +88,9 @@ public class Episodio
     private String posiblesCausas;
     
     //Constructor de episodio que cuenta con atributos de id Paciente, fechaE,nivelID, patron N
-    public Episodio(int idPacienteN, String fechaE,String nivelD,String horaE,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
+    public Episodio(String nDocPaciente, String fechaE,String nivelD,String horaE,String patronN,ArrayList <String> alimentosN,ArrayList <String> bebidasN,ArrayList <String> actividadN,ArrayList <String> medicamentoN)
     {
-        idPaciente=idPacienteN;
+        documentoPaciente=nDocPaciente;
         fechaEpisodio=fechaE;
         nivelDolor=nivelD;
         hora=horaE;            
@@ -116,12 +116,12 @@ public class Episodio
         this.createdAt = this.updatedAt = Calendar.getInstance();
     }
     
-    public int getIdPaciente() {
-        return idPaciente;
+    public String getDocumentoPaciente() {
+        return documentoPaciente;
     }
 
-    public void setIdPaciente(int idPaciente) {
-        this.idPaciente = idPaciente;
+    public void setDocumentoPaciente(String nDocuPaciente) {
+        this.documentoPaciente = nDocuPaciente;
     }
     
     

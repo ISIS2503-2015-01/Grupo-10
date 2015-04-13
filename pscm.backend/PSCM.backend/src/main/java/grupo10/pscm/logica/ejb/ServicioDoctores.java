@@ -79,7 +79,7 @@ public class ServicioDoctores implements IServicioDoctores
         try
         {
             entityManager.getTransaction().begin();
-            Query q = entityManager.createQuery("DELETE FROM Doctor d WHERE d.id="+id);
+            Query q = entityManager.createQuery("DELETE FROM Doctor d WHERE d.documento="+id);
             int deleted = q.executeUpdate();
             entityManager.getTransaction().commit();
         } 
@@ -95,7 +95,7 @@ public class ServicioDoctores implements IServicioDoctores
     @Override
     public List<Doctor> getDoctores() 
     {
-      Query q = entityManager.createQuery("select u from Doctor u order by u.id ASC");
+      Query q = entityManager.createQuery("select u from Doctor u order by u.documento ASC");
       List<Doctor> doctores = q.getResultList();
         
         return doctores;
@@ -124,7 +124,7 @@ public class ServicioDoctores implements IServicioDoctores
     @Override
     public Doctor getDoctor(String id) 
     {
-        Query q = entityManager.createQuery("SELECT d FROM Doctor d WHERE d.id="+id+"");
+        Query q = entityManager.createQuery("SELECT d FROM Doctor d WHERE d.documento="+id+"");
         Doctor doctorcito = (Doctor) q.getSingleResult();
         return doctorcito;
     }

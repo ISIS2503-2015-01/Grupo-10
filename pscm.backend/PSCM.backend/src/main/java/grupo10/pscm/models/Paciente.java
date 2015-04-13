@@ -28,13 +28,10 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @Entity
 public class Paciente 
 {
-     private static final long serialVersionUID = 1L;
-     
-     
+    private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Field(name="_id")
-    private int id;
+    private String documento;
     
     private String apellido;
     
@@ -50,12 +47,12 @@ public class Paciente
      
     //private ArrayList<Episodio> episodios;
 
-    public Paciente(String nombreN,String apellidoN,String telefonoC,int identificacionN,String telefonoF,String generoN,String direccionN)
+    public Paciente(String nombreN,String apellidoN,String telefonoC,String nDocumento,String telefonoF,String generoN,String direccionN)
     {
         nombre=nombreN;
         apellido=apellidoN;
         telefonoCelular=telefonoC;            
-        id=identificacionN;  
+        documento=nDocumento;  
         telefonoFijo=telefonoF;
         genero=generoN;
         direccion=direccionN;
@@ -67,8 +64,8 @@ public class Paciente
         
     }
     
-    public int getId() {
-        return id;
+    public String getDocumento() {
+        return documento;
     }
 
     public String getApellido() {
@@ -95,8 +92,8 @@ public class Paciente
         return telefonoCelular;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDocumento(String nDocumento) {
+        this.documento = nDocumento;
     }
 
     public void setApellido(String apellido) {

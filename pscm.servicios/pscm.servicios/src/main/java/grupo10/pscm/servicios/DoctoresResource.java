@@ -71,7 +71,7 @@ public class DoctoresResource {
     {
         try
         {
-            Doctor d = new Doctor(doctor.getNombre(), doctor.getApellido(), doctor.getContrasena(), doctor.getId(), doctor.getTelefonoC());
+            Doctor d = new Doctor(doctor.getNombre(), doctor.getApellido(), doctor.getContrasena(), doctor.getDocumento(), doctor.getTelefonoC());
             servDoctores.agregarDoctor(d);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(d).build();
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class DoctoresResource {
     {
         try
         {
-            Doctor d = new Doctor(doctor.getNombre(), doctor.getApellido(), doctor.getContrasena(), doctor.getId(), doctor.getTelefonoC());
+            Doctor d = new Doctor(doctor.getNombre(), doctor.getApellido(), doctor.getContrasena(), doctor.getDocumento(), doctor.getTelefonoC());
             servDoctores.actualizarDoctor(d);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(d).build();
         } catch (Exception e) {
@@ -106,6 +106,7 @@ public class DoctoresResource {
         try
         {
             servDoctores.eliminarDoctor(code);
+            servDoctores = new ServicioDoctores();
             List<Doctor> doctores = servDoctores.getDoctores();
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctores).build();
         } catch (Exception e) {

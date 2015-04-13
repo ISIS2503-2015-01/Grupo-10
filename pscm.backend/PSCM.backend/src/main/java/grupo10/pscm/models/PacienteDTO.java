@@ -15,7 +15,7 @@ import javax.persistence.Id;
  */
 public class PacienteDTO 
 {
-    private int id;
+    private String documento;
     
     private String apellido;
     
@@ -32,8 +32,8 @@ public class PacienteDTO
     //private ArrayList<Episodio> episodios;
 
 
-    public int getId() {
-        return id;
+    public String getDocumento() {
+        return documento;
     }
 
     public String getApellido() {
@@ -60,8 +60,8 @@ public class PacienteDTO
         return telefonoCelular;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDocumento(String nDoc) {
+        this.documento = nDoc;
     }
 
     public void setApellido(String apellido) {

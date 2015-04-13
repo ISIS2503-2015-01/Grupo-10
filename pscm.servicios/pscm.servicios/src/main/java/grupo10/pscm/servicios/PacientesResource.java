@@ -74,7 +74,7 @@ public class PacientesResource {
     {
         try
         {
-            Paciente p = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getTelefonoCelular(), paciente.getId(), paciente.getTelefonoFijo(), paciente.getGenero(), paciente.getDireccion());
+            Paciente p = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getTelefonoCelular(), paciente.getDocumento(), paciente.getTelefonoFijo(), paciente.getGenero(), paciente.getDireccion());
             servPacientes.agregarPaciente(p);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(p).build();
         } catch (Exception e) {
@@ -91,7 +91,7 @@ public class PacientesResource {
     {
         try
         {
-            Paciente p = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getTelefonoCelular(), paciente.getId(), paciente.getTelefonoFijo(), paciente.getGenero(), paciente.getDireccion());
+            Paciente p = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getTelefonoCelular(), paciente.getDocumento(), paciente.getTelefonoFijo(), paciente.getGenero(), paciente.getDireccion());
             servPacientes.actualizarPaciente(p);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(p).build();
         } catch (Exception e) {
@@ -109,6 +109,7 @@ public class PacientesResource {
         try
         {
             servPacientes.eliminarPaciente(code);
+            servPacientes = new ServicioPacientes();
             List<Paciente> pacientes = servPacientes.getPacientes(); //TODO maybe delete this line
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacientes).build();
         } catch (Exception e) {

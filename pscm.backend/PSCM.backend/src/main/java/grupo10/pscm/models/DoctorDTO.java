@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author estudiante
  */
 public class DoctorDTO {
-    private int id;
+    private String documento;
     
     private String apellido;  
   
@@ -58,13 +58,13 @@ public class DoctorDTO {
         this.telefonoContacto = tel;
     }
 
-    public int getId() 
+    public String getDocumento() 
     {
-        return id;
+        return documento;
     }
 
-    public void setIdentificacion(int ide) {
-        this.id = ide;
+    public void setDocumento(String nDocumento) {
+        this.documento = nDocumento;
     }
     
     public String getContrasena() 

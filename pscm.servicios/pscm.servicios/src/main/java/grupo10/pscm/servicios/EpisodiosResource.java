@@ -63,7 +63,7 @@ public class EpisodiosResource {
     {
         try
         {
-            Episodio e = new Episodio(episodio.getIdPaciente(), episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
+            Episodio e = new Episodio(episodio.getDocumentoPaciente(), episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
             servEpisodios.actualizarEpisodio(e);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(e).build();
         } catch (Exception e) {
@@ -96,7 +96,7 @@ public class EpisodiosResource {
     {
         try
         {
-            Episodio e = new Episodio(episodio.getIdPaciente(), episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
+            Episodio e = new Episodio(episodio.getDocumentoPaciente(), episodio.getFechaEpisodio(), episodio.getNivelDolor(), episodio.getHora(), episodio.getPatronSueno(), episodio.getAlimentos(), episodio.getBebidas(), episodio.getActividadFisica(), episodio.getMedicamentos());
             servEpisodios.agregarEpisodio(e);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(e).build();
         } catch (Exception e) {
@@ -113,6 +113,7 @@ public class EpisodiosResource {
         try
         {
             servEpisodios.eliminarEpisodio(code);
+            servEpisodios = new ServicioEpisodios();
             List<Episodio> episodios = servEpisodios.getEpisodios();
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
         } catch (Exception e) {

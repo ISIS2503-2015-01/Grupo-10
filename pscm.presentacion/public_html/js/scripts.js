@@ -30,20 +30,20 @@ function loadPacientes() {
         }).then(function(data) {
        for (var i = 0; i < data.length; i++){
            //var cantidadEps = getCantidadEpisodios(data[i].id);
-            $('.tablaPacientes').append('<tr id='+data[i].id+'><td>'+data[i].nombre+'</td><td>'+data[i].apellido+'</td><td>'+data[i].genero+'</td><td>'+data[i].direccion+'</td><td>'+data[i].telefonoFijo+'</td><td>'+data[i].telefonoCelular+'</td>');
-            getCantidadEpisodios(data[i].id);    
+            $('.tablaPacientes').append('<tr id='+data[i].documento+'><td>'+data[i].documento+'</td><td>'+data[i].nombre+'</td><td>'+data[i].apellido+'</td><td>'+data[i].genero+'</td><td>'+data[i].direccion+'</td><td>'+data[i].telefonoFijo+'</td><td>'+data[i].telefonoCelular+'</td>');
+            getCantidadEpisodios(data[i].documento);    
        }
        
     });
 }
 
 
-function getCantidadEpisodios(id){
+function getCantidadEpisodios(documento){
     $.ajax({
-        url: "http://localhost:8080/pscm.servicios/webresources/Episodios/paciente?id="+id
+        url: "http://localhost:8080/pscm.servicios/webresources/Episodios/paciente?id="+documento
         }).then(function(data) {
             console.log(data.length);
-           $('#'+id).append('<td>'+data.length+'</td><td><button onClick="loadEpisodiosPaciente('+id+')">Ver episodios</button></td></tr>');
+           $('#'+documento).append('<td>'+data.length+'</td><td><button onClick="loadEpisodiosPaciente('+documento+')">Ver episodios</button></td></tr>');
     });
 }
 
@@ -61,7 +61,7 @@ function loadEpisodios() {
             }).then(function(data) {
            for (var i = 0; i < data.length; i++){
                //var cantidadEps = getCantidadEpisodios(data[i].id);
-                $('.tablaEpisodios').append('<tr id='+data[i].id+'><td>'+data[i].idPaciente+'</td><td>'+addIfNotNull(data[i].fechaEpisodio)+'</td><td>'+addIfNotNull(data[i].hora)+'</td><td>'+addIfNotNull(data[i].nivelDolor)+'</td><td>'+addIfNotNull(data[i].localizacion)+'</td><td>'+addIfNotNull(data[i].patronSueno)+'</td><td><button type="button" data-toggle="modal" data-target="#modalEp'+data[i].id+'">Ver</button></td>'); 
+                $('.tablaEpisodios').append('<tr id='+data[i].id+'><td>'+data[i].documentoPaciente+'</td><td>'+addIfNotNull(data[i].fechaEpisodio)+'</td><td>'+addIfNotNull(data[i].hora)+'</td><td>'+addIfNotNull(data[i].nivelDolor)+'</td><td>'+addIfNotNull(data[i].localizacion)+'</td><td>'+addIfNotNull(data[i].patronSueno)+'</td><td><button type="button" data-toggle="modal" data-target="#modalEp'+data[i].id+'">Ver</button></td>'); 
                 $('.tablaEpisodios').append('<!-- Modal -->'+
                  '<div class="modal fade" id="modalEp'+data[i].id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
                  '<div class="modal-dialog">'+
@@ -91,8 +91,8 @@ function loadEpisodios() {
             }).then(function(data) {
            for (var i = 0; i < data.length; i++){
                //var cantidadEps = getCantidadEpisodios(data[i].id);
-               $('#epTitle').append(' - Paciente: '+ data[i].idPaciente);
-               $('.tablaEpisodios').append('<tr id='+data[i].id+'><td>'+data[i].idPaciente+'</td><td>'+addIfNotNull(data[i].fechaEpisodio)+'</td><td>'+addIfNotNull(data[i].hora)+'</td><td>'+addIfNotNull(data[i].nivelDolor)+'</td><td>'+addIfNotNull(data[i].localizacion)+'</td><td>'+addIfNotNull(data[i].patronSueno)+'</td><td><button type="button" data-toggle="modal" data-target="#modalEp'+data[i].id+'">Ver</button></td>'); 
+               $('#epTitle').append(' - Paciente: '+ data[i].documentoPaciente);
+               $('.tablaEpisodios').append('<tr id='+data[i].id+'><td>'+data[i].documentoPaciente+'</td><td>'+addIfNotNull(data[i].fechaEpisodio)+'</td><td>'+addIfNotNull(data[i].hora)+'</td><td>'+addIfNotNull(data[i].nivelDolor)+'</td><td>'+addIfNotNull(data[i].localizacion)+'</td><td>'+addIfNotNull(data[i].patronSueno)+'</td><td><button type="button" data-toggle="modal" data-target="#modalEp'+data[i].id+'">Ver</button></td>'); 
                $('.tablaEpisodios').append('<!-- Modal -->'+
                  '<div class="modal fade" id="modalEp'+data[i].id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
                  '<div class="modal-dialog">'+

@@ -126,8 +126,8 @@ public class ServicioEpisodios implements IServicioEpisodios
     }
 
     @Override
-    public List<Episodio> getEpisodiosPaciente(String id) {
-        Query q = entityManager.createQuery("SELECT e FROM Episodio e WHERE e.idPaciente="+id+"");
+    public List<Episodio> getEpisodiosPaciente(String doc) {
+        Query q = entityManager.createQuery("SELECT e FROM Episodio e WHERE e.documentoPaciente="+doc+"");
         List<Episodio> episodios = q.getResultList();
         return episodios;
     }

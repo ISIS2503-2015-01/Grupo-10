@@ -17,7 +17,7 @@ public class EpisodioDTO
 {
     private int id;
     
-    private int idPaciente;
+    private String documentoPaciente;
     
     private String fechaEpisodio;
     
@@ -41,12 +41,12 @@ public class EpisodioDTO
     
     private String posiblesCausas;
 
-    public int getIdPaciente() {
-        return idPaciente;
+    public String getDocumentoPaciente() {
+        return documentoPaciente;
     }
 
-    public void setIdPaciente(int idPaciente) {
-        this.idPaciente = idPaciente;
+    public void setDocumentoPaciente(String nDocPaciente) {
+        this.documentoPaciente = nDocPaciente;
     }
     
     public ArrayList<String> getAlimentos() {

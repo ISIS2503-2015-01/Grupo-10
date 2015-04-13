@@ -84,7 +84,7 @@ public class ServicioPacientes implements IServicioPacientes
        try
         {
             entityManager.getTransaction().begin();
-            Query q = entityManager.createQuery("DELETE FROM Paciente p WHERE p.id="+id);
+            Query q = entityManager.createQuery("DELETE FROM Paciente p WHERE p.documento="+id);
             int deleted = q.executeUpdate();
             entityManager.getTransaction().commit();
         } 
@@ -101,7 +101,7 @@ public class ServicioPacientes implements IServicioPacientes
     @Override
     public List<Paciente> getPacientes() 
     {
-        Query q = entityManager.createQuery("select u from Paciente u order by u.id ASC");
+        Query q = entityManager.createQuery("select u from Paciente u order by u.documento ASC");
         List<Paciente> pacientes = q.getResultList();
         
         return pacientes;
@@ -129,7 +129,7 @@ public class ServicioPacientes implements IServicioPacientes
     @Override
     public Paciente getPaciente(String id)
     {
-        Query q = entityManager.createQuery("SELECT p FROM Paciente p WHERE p.id="+id+"");
+        Query q = entityManager.createQuery("SELECT p FROM Paciente p WHERE p.documento="+id+"");
         Paciente p = (Paciente) q.getSingleResult();
         return p;
     }
